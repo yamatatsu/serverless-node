@@ -5,5 +5,5 @@ sls deploy -v
 
 # call test
 ```
-sls invoke -f hello
+sls invoke -f hello --data "helloooofuuuu"
 ```
