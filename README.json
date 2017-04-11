@@ -1,0 +1,9 @@
+# deploy
+```
+sls deploy -v
+```
+
+# call test
+```
+sls invoke -f hello
+```
