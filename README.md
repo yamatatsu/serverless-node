@@ -9,6 +9,11 @@ npm start
 sls webpack watch -f <function-name> -p <json-file-path>
 ```
 
+例）
+```
+sls webpack watch -f getTicket -p jsons/tickets/readOne/index.json
+```
+
 # デプロイ
 ```
 npm run build
