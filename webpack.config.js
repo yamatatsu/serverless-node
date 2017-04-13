@@ -3,7 +3,7 @@ const glob = require('glob')
 
 module.exports = {
   entry: glob.sync('./handlers/*.js').reduce((acc, item) => {
-    return Object.assign(acc, { [path.basename(item, '.ts')]: item })
+    return Object.assign(acc, { [path.basename(item, '.js')]: item })
   }, {}),
 
   target:  'node',
@@ -15,7 +15,7 @@ module.exports = {
 
   output: {
     libraryTarget: 'commonjs',
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, '.webpack'),
     filename: '[name].js',
   },
 }
