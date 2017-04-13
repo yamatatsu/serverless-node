@@ -1,5 +1,7 @@
 const path = require('path')
 const glob = require('glob')
+const nodeExternals = require('webpack-node-externals')
+
 
 module.exports = {
   entry: glob.sync('./handlers/*.js').reduce((acc, item) => {
@@ -13,7 +15,6 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        include: __dirname,
         exclude: /(node_modules)/,
         loader: 'babel-loader',
       },
@@ -25,4 +26,6 @@ module.exports = {
     path: path.join(__dirname, '.webpack'),
     filename: '[name].js',
   },
+
+  externals: [nodeExternals()],
 }
