@@ -13,6 +13,20 @@ functions:
   hello:
     handler: hello.read
     events:
-       - http:
-           path: hello
-           method: get
+      - http:
+          path: hello
+          method: get
+
+  getTicket:
+    handler: tickets.readOne
+    events:
+      - http:
+          path: tickets/{key}
+          method: get
+
+  getTickets:
+    handler: tickets.read
+    events:
+      - http:
+          path: tickets
+          method: get
