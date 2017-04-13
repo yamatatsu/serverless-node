@@ -6,6 +6,9 @@ provider:
   stage: dev
   region: ap-northeast-1
 
+plugins:
+  - serverless-webpack
+
 functions:
   hello:
     handler: handler.hello
@@ -13,4 +16,3 @@ functions:
        - http:
            path: hello
            method: get
-           cors: true
