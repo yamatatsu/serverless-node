@@ -1,6 +1,4 @@
-'use strict'
-
-module.exports.readOne = (event, context, callback) => {
+export const readOne = (event, context, callback) => {
   console.info({ event, context })
 
   callback(null, {
@@ -9,7 +7,7 @@ module.exports.readOne = (event, context, callback) => {
   })
 }
 
-module.exports.read = (event, context, callback) => {
+export const read = (event, context, callback) => {
   console.info({ event, context })
 
   callback(null, {

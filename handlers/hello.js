@@ -1,6 +1,4 @@
-'use strict'
-
-module.exports.read = (event, context, callback) => {
+export const read = (event, context, callback) => {
   console.info({ event, context })
 
   callback(null, {

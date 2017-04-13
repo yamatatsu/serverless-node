@@ -10,7 +10,14 @@ module.exports = {
   devtool: 'source-map',
 
   module: {
-    rules: [],
+    loaders: [
+      {
+        test: /\.js$/,
+        include: __dirname,
+        exclude: /(node_modules)/,
+        loader: 'babel-loader',
+      },
+    ],
   },
 
   output: {
