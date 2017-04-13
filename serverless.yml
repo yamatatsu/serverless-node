@@ -11,7 +11,7 @@ plugins:
 
 functions:
   hello:
-    handler: handler.hello
+    handler: hello.read
     events:
        - http:
            path: hello
