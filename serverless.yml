@@ -5,6 +5,8 @@ provider:
   runtime: nodejs6.10
   stage: dev
   region: ap-northeast-1
+  apiKeys:
+    - internal
 
 plugins:
   - serverless-webpack
@@ -16,6 +18,7 @@ functions:
       - http:
           path: hello
           method: get
+          private: true
 
   getTicket:
     handler: tickets.readOne
@@ -23,6 +26,7 @@ functions:
       - http:
           path: tickets/{key}
           method: get
+          private: true
 
   getTickets:
     handler: tickets.read
@@ -30,3 +34,4 @@ functions:
       - http:
           path: tickets
           method: get
+          private: true
