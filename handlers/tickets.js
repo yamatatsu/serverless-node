@@ -5,9 +5,11 @@ install()
 export const readOne = (event, context, callback) => {
   console.info({ event, context })
 
+  const key = event.pathParameters.key
+
   callback(null, {
     statusCode: 200,
-    body: 'read one ticket!!',
+    body: `read one ticket!! key: ${key}`,
   })
 }
 
