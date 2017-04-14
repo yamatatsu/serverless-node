@@ -34,7 +34,7 @@ export const put = (event, context, callback) => {
     Item: {
       ticketKey: event.pathParameters.ticketKey,
       fuga: body.fuga,
-      updatedAt: new Date().toString(),
+      putAt: new Date().toString(),
     },
     // Expected: {
     //   id: { Exists: false },
