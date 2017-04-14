@@ -2,10 +2,7 @@
 import { install } from 'source-map-support'
 install()
 
-import AWS from 'aws-sdk'
-AWS.config.update({ region: 'ap-northeast-1' })
-const dc = new AWS.DynamoDB.DocumentClient()
-
+import db from '../db'
 
 export const get = (event, context, callback) => {
   console.info({ event, context })
@@ -13,32 +10,30 @@ export const get = (event, context, callback) => {
   const params = {
     TableName: 'Tickets',
     Key: {
-      ticketKey: event.pathParameters.ticketKey
-    }
+      ticketKey: event.pathParameters.ticketKey,
+    },
   }
 
-  dc.get(params, (error, data) => {
-    if (error) {
-      callback(error)
-      return
-    }
-    callback(null, {
-      statusCode: 200,
-      body: JSON.stringify(data.Item),
+  db.get(params)
+    .then(data => {
+      callback(null, {
+        statusCode: 200,
+        body: JSON.stringify(data.Item),
+      })
     })
-  })
+    .catch(err => callback(err))
 }
 
 export const put = (event, context, callback) => {
   console.info({ event, context })
 
-  const data = JSON.parse(event.body)
+  const body = JSON.parse(event.body)
 
   const params = {
     TableName: 'Tickets',
     Item: {
       ticketKey: event.pathParameters.ticketKey,
-      fuga: data.fuga,
+      fuga: body.fuga,
       updatedAt: new Date().toString(),
     },
     // Expected: {
@@ -46,14 +41,12 @@ export const put = (event, context, callback) => {
     // }
   }
 
-  dc.put(params, (error, data) => {
-    if (error) {
-      callback(error)
-      return
-    }
-    callback(null, {
-      statusCode: 200,
-      body: JSON.stringify(params.Item),
+  db.put(params)
+    .then(data => {
+      callback(null, {
+        statusCode: 200,
+        body: JSON.stringify(params.Item),
+      })
     })
-  })
+    .catch(err => callback(err))
 }
