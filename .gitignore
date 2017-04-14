@@ -8,4 +8,5 @@ npm-debug.log
 .webpack
 
 # other
+.env
 .memo

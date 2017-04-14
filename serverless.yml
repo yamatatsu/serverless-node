@@ -14,11 +14,13 @@ provider:
       Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/*"
 
 plugins:
-  - serverless-dynamodb-local
+  - serverless-plugin-write-env-vars
   - serverless-webpack
 
 custom:
   webpackIncludeModules: true
+  writeEnvVars:
+    REGION: ${self:provider.region}
 
 functions:
   hello:
