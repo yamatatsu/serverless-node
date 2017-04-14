@@ -7,9 +7,18 @@ provider:
   region: ap-northeast-1
   apiKeys:
     - internal
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - "dynamodb:*"
+      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/*"
 
 plugins:
+  - serverless-dynamodb-local
   - serverless-webpack
+
+custom:
+  webpackIncludeModules: true
 
 functions:
   hello:
@@ -21,17 +30,36 @@ functions:
           private: true
 
   getTicket:
-    handler: tickets.readOne
+    handler: tickets.get
     events:
       - http:
-          path: tickets/{key}
+          path: tickets/{ticketKey}
           method: get
           private: true
 
-  getTickets:
-    handler: tickets.read
+  putTicket:
+    handler: tickets.put
     events:
       - http:
-          path: tickets
-          method: get
+          path: tickets/{ticketKey}
+          method: put
           private: true
+
+resources:
+  Resources:
+    Ticket:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: ticketKey
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: ticketKey
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: 'Tickets'

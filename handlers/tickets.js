@@ -2,22 +2,58 @@
 import { install } from 'source-map-support'
 install()
 
-export const readOne = (event, context, callback) => {
+import AWS from 'aws-sdk'
+AWS.config.update({ region: 'ap-northeast-1' })
+const dc = new AWS.DynamoDB.DocumentClient()
+
+
+export const get = (event, context, callback) => {
   console.info({ event, context })
 
-  const key = event.pathParameters.key
+  const params = {
+    TableName: 'Tickets',
+    Key: {
+      ticketKey: event.pathParameters.ticketKey
+    }
+  }
 
-  callback(null, {
-    statusCode: 200,
-    body: `read one ticket!! key: ${key}`,
+  dc.get(params, (error, data) => {
+    if (error) {
+      callback(error)
+      return
+    }
+    callback(null, {
+      statusCode: 200,
+      body: JSON.stringify(data.Item),
+    })
   })
 }
 
-export const read = (event, context, callback) => {
+export const put = (event, context, callback) => {
   console.info({ event, context })
 
-  callback(null, {
-    statusCode: 200,
-    body: 'read all tickets!!',
+  const data = JSON.parse(event.body)
+
+  const params = {
+    TableName: 'Tickets',
+    Item: {
+      ticketKey: event.pathParameters.ticketKey,
+      fuga: data.fuga,
+      updatedAt: new Date().toString(),
+    },
+    // Expected: {
+    //   id: { Exists: false },
+    // }
+  }
+
+  dc.put(params, (error, data) => {
+    if (error) {
+      callback(error)
+      return
+    }
+    callback(null, {
+      statusCode: 200,
+      body: JSON.stringify(params.Item),
+    })
   })
 }
