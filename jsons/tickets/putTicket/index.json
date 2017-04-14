@@ -1,0 +1,6 @@
+{
+  "pathParameters": {
+    "ticketKey": "hoge"
+  },
+  "body": "{ \"fuga\" : \"fugaaaaa\" }"
+}
