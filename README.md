@@ -18,3 +18,11 @@ sls webpack watch -f getTicket -p jsons/tickets/readOne/index.json
 ```
 npm run build
 ```
+### 実行してみる
+```
+curl -X PUT https://<youre-api-gateway-domain>/dev/tickets/hoge -d '{ "fuga" : "fugaaaa" }' -H "x-api-key: <youre-api-key>"
+```
+
+```
+curl -X GET https://<youre-api-gateway-domain>/dev/tickets/hoge -H "x-api-key: <youre-api-key>"
+```
