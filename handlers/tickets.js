@@ -16,6 +16,12 @@ export const get = (event, context, callback) => {
 
   db.get(params)
     .then(data => {
+      if (!data.Item) {
+        callback(null, {
+          statusCode: 404,
+          body: JSON.stringify({message: 'Not Found'}),
+        })
+      }
       callback(null, {
         statusCode: 200,
         body: JSON.stringify(data.Item),
