@@ -1,0 +1,5 @@
+extends: standard
+rules:
+  import/first: 0
+  comma-dangle: [error, always-multiline]
+  space-before-function-paren: [error, never]

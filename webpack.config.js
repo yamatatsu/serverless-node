@@ -7,14 +7,14 @@ module.exports = {
     return Object.assign(acc, { [path.basename(item, '.js')]: item })
   }, {}),
 
-  target:  'node',
+  target: 'node',
   devtool: 'source-map',
 
   module: {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        loaders: ['babel-loader', 'eslint-loader'],
         include: __dirname,
         exclude: /node_modules/,
       },
