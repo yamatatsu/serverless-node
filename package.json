@@ -4,16 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "sls webpack watch",
     "lint": "eslint .",
-    "deploy": "sls deploy"
+    "flow": "flow .",
+    "prepublish": "npm-run-all flow",
+    "publish": "sls deploy"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.2",
     "babel-loader": "^6.4.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.3.3",
+    "babel-preset-flow": "^6.23.0",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.0",
     "eslint-loader": "^1.7.1",
@@ -21,6 +26,8 @@
     "eslint-plugin-node": "^4.2.2",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
+    "flow-bin": "^0.44.0",
+    "npm-run-all": "^4.0.2",
     "serverless": "^1.11.0",
     "serverless-webpack": "^1.0.0-rc.4",
     "webpack": "^2.3.3",
@@ -28,8 +35,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.41.0",
-    "babel-polyfill": "^6.23.0",
-    "babel-runtime": "^6.23.0",
+    "dotenv": "^4.0.0",
     "serverless-plugin-write-env-vars": "^1.0.1",
     "source-map-support": "^0.4.14"
   }
