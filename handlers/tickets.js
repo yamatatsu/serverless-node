@@ -1,3 +1,4 @@
+// @flow
 import './base'
 import db from '../db'
 
