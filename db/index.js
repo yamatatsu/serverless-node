@@ -1,6 +1,3 @@
-import dotenv from 'dotenv'
-dotenv.config()
-
 import AWS from 'aws-sdk'
 AWS.config.update({ region: process.env.REGION })
 const client = new AWS.DynamoDB.DocumentClient()

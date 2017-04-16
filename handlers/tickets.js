@@ -1,7 +1,4 @@
-// これをやっておくとCloud Watchに詳細なログが吐ける
-import { install } from 'source-map-support'
-install()
-
+import './base'
 import db from '../db'
 
 export const get = (event, context, callback) => {
