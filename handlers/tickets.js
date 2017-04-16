@@ -2,10 +2,12 @@
 import './base'
 import db from '../db'
 
-export const get = (event, context, callback) => {
+import type { HandlerType, DBGetParams, DBPutParams } from '../types'
+
+export const get: HandlerType = (event, context, callback) => {
   console.info({ event, context })
 
-  const params = {
+  const params: DBGetParams = {
     TableName: 'Tickets',
     Key: {
       ticketKey: event.pathParameters.ticketKey,
@@ -28,12 +30,12 @@ export const get = (event, context, callback) => {
     .catch(err => callback(err))
 }
 
-export const put = (event, context, callback) => {
+export const put: HandlerType = (event, context, callback) => {
   console.info({ event, context })
 
   const body = JSON.parse(event.body)
 
-  const params = {
+  const params: DBPutParams = {
     TableName: 'Tickets',
     Item: {
       ticketKey: event.pathParameters.ticketKey,
